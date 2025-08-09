@@ -1,7 +1,9 @@
 #include <iostream>
 #include <limits>
 #include <stdlib.h>
-//Day 2 Project Password Saver
+#include <fstream>
+#include <string>
+
 void MainMenu();
 void password1();
 void password2();
@@ -46,7 +48,18 @@ int main()
 	 std::cin >> passoption;
 	 if (passoption == 1) 
 	 {
-		 std::cout << "{ " << UserPassword1 << " } Is OUR Password";
+		 
+
+		
+		 std::ifstream ReadZDFILE("ZeroDayPassword.txt");
+		 std::string ZDPText;
+	
+		 if (ReadZDFILE && std::getline(ReadZDFILE, ZDPText))
+		 {
+			 UserPassword1 = ZDPText;
+		 }
+
+		 std::cout << "{ " << ZDPText << " } Is OUR Password";
 		 system("pause");
 		 MainMenu();
 	 }
@@ -54,6 +67,9 @@ int main()
 	 {
 		 std::cout << "Enter Your Password\n";
 		 std::cin >> UserPassword1;
+		 std::ofstream ZDFILE("ZeroDayPassword.txt");
+		 ZDFILE << UserPassword1;
+		 ZDFILE.close();
 		 MainMenu();
 	 }
 	 else
@@ -71,8 +87,20 @@ int main()
 	 std::cin >> passoption;
 	 if (passoption == 1)
 	 {
-		 std::cout << "{ " << UserPassword2 << " } Is OUR Password";
+
+
+
+		 std::ifstream ReadZDFILE("ZeroDayPassword.txt");
+		 std::string ZDPText;
 		
+		 if (ReadZDFILE && std::getline(ReadZDFILE, ZDPText))
+		 {
+			 std::getline(ReadZDFILE, ZDPText);
+			 UserPassword2 = ZDPText;
+		 }
+		 std::cout << "{ " << ZDPText << " } Is OUR Password";
+
+
 
 		 system("pause");
 		 MainMenu();
@@ -81,6 +109,9 @@ int main()
 	 {
 		 std::cout << "Enter Your Password\n";
 		 std::cin >> UserPassword2;
+		 std::ofstream ZDFILE("ZeroDayPassword.txt");
+		 ZDFILE << UserPassword1 << '\n' << UserPassword2;
+		 ZDFILE.close();
 		 MainMenu();
 	 }
 	 else
@@ -99,7 +130,20 @@ int main()
 	 std::cin >> passoption;
 	 if (passoption == 1)
 	 {
-		 std::cout << "{ " << UserPassword3 << " } Is OUR Password";
+
+
+
+		 std::ifstream ReadZDFILE("ZeroDayPassword.txt");
+		 std::string ZDPText;
+
+		 if (ReadZDFILE && std::getline(ReadZDFILE, ZDPText))
+		 {
+			 std::getline(ReadZDFILE, ZDPText);
+			 std::getline(ReadZDFILE, ZDPText);
+			 UserPassword3 = ZDPText;
+		 }
+		 std::cout << "{ " << ZDPText << " } Is OUR Password";
+
 		 system("pause");
 		 MainMenu();
 	 }
@@ -107,7 +151,9 @@ int main()
 	 {
 		 std::cout << "Enter Your Password\n";
 		 std::cin >> UserPassword3;
-
+		 std::ofstream ZDFILE("ZeroDayPasswordsho.txt");
+		 ZDFILE << UserPassword1 << '\n' << UserPassword2 << '\n' << UserPassword3;
+		 ZDFILE.close();
 		 MainMenu();
 	 }
 	 else
